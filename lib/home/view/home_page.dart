@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/home/widgets/widgets.dart';
+import 'package:pokemon_api/pokemon_api.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,6 +22,9 @@ class HomeView extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       ),
+      floatingActionButton: FloatingActionButton.large(onPressed: () async {
+        await PokemonApiClient().pokemonList();
+      }),
       body: ListView.separated(
         itemBuilder: (context, index) => const ListItem(),
         itemCount: items.length,
