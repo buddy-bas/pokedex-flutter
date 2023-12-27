@@ -11,7 +11,7 @@ class ApiClient {
   Dio dio() {
     var dio = Dio(
       BaseOptions(
-        baseUrl: 'https://pokeapi.co/api/v2/',
+        baseUrl: '',
       ),
     );
     return dio;
