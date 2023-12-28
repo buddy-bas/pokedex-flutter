@@ -4,28 +4,29 @@ part of 'home_bloc.dart';
 final class HomeState extends Equatable {
   const HomeState(
       {this.pokemonList = const [],
-      this.nextPageUrl = '',
-      this.isLoading = false});
+      this.isLoading = false,
+      this.hasReachedMax = false});
 
   final List<PokemonResponseResult> pokemonList;
-  final String nextPageUrl;
   final bool isLoading;
+  final bool hasReachedMax;
 
   @override
-  List<Object?> get props => [pokemonList, isLoading, nextPageUrl];
+  List<Object?> get props => [pokemonList, isLoading, hasReachedMax];
 
   @override
   String toString() {
-    return '''HomeState { pokemonList: $pokemonList, nextPageUrl: $nextPageUrl, isLoading: $isLoading} ''';
+    return '''HomeState { pokemonList: $pokemonList, isLoading: $isLoading, hasReachedMax: $hasReachedMax} ''';
   }
 
   HomeState copyWith(
       {List<PokemonResponseResult>? pokemonList,
-      String? nextPageUrl,
-      bool? isLoading}) {
+      bool? isLoading,
+      bool? hasReachedMax}) {
     return HomeState(
-        pokemonList: pokemonList ?? this.pokemonList,
-        nextPageUrl: nextPageUrl ?? this.nextPageUrl,
-        isLoading: isLoading ?? this.isLoading);
+      pokemonList: pokemonList ?? this.pokemonList,
+      isLoading: isLoading ?? this.isLoading,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
   }
 }

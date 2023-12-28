@@ -32,7 +32,12 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        context.read<HomeBloc>().add(FetchPokemonList());
+      }
+    });
   }
 
   @override
@@ -53,7 +58,12 @@ class _HomeViewState extends State<HomeView> {
             controller: _scrollController,
             itemBuilder: (context, index) {
               if (index < pokemonList.length) {
-                return ListItem(name: pokemonList[index].name, id: "213");
+                final uri = Uri.parse(pokemonList[index].url);
+                final id = uri.pathSegments[3];
+                return ListItem(
+                  name: pokemonList[index].name,
+                  id: id,
+                );
               } else {
                 return !isLoading
                     ? const SizedBox.shrink()
@@ -73,20 +83,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (_isBottom) context.read<HomeBloc>().add(FetchPokemonList());
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
   }
 }
