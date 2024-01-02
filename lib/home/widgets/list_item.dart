@@ -18,12 +18,12 @@ class ListItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 48,
+            height: 48,
             margin: const EdgeInsets.only(right: 24),
-            decoration: BoxDecoration(color: Colors.grey.shade100),
+            // decoration: BoxDecoration(color: Colors.grey.shade100),
             child: Image.network(
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png",
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) {
                   return child;
@@ -56,24 +56,6 @@ class ListItem extends StatelessWidget {
                   style: const TextStyle(fontSize: 14),
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: const BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                  ),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: const BoxDecoration(
-                        color: Colors.brown,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                  ),
-                ],
-              )
             ],
           )
         ],

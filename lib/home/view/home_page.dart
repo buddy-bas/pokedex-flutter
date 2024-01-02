@@ -3,8 +3,10 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokedex/home/bloc/home_bloc.dart';
 import 'package:pokedex/home/widgets/widgets.dart';
+import 'package:pokemon_api/pokemon_api.dart';
 import 'package:pokemon_repository/pokemon_repository.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,6 +42,32 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
+  Widget _buildListItem(BuildContext context, int index,
+      {required bool isLoading,
+      required List<PokemonResponseResult> listData}) {
+    if (index < listData.length) {
+      final uri = Uri.parse(listData[index].url);
+      final id = uri.pathSegments[3];
+      return InkWell(
+        splashColor: Colors.transparent,
+        onTap: () {
+          context.pushNamed('detail');
+        },
+        child: ListItem(
+          name: listData[index].name,
+          id: id,
+        ),
+      );
+    } else {
+      return !isLoading
+          ? const SizedBox.shrink()
+          : Center(
+              child: Platform.isIOS
+                  ? const CupertinoActivityIndicator()
+                  : const CircularProgressIndicator());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,23 +84,8 @@ class _HomeViewState extends State<HomeView> {
               context.select((HomeBloc bloc) => bloc.state.isLoading);
           return ListView.separated(
             controller: _scrollController,
-            itemBuilder: (context, index) {
-              if (index < pokemonList.length) {
-                final uri = Uri.parse(pokemonList[index].url);
-                final id = uri.pathSegments[3];
-                return ListItem(
-                  name: pokemonList[index].name,
-                  id: id,
-                );
-              } else {
-                return !isLoading
-                    ? const SizedBox.shrink()
-                    : Center(
-                        child: Platform.isIOS
-                            ? const CupertinoActivityIndicator()
-                            : const CircularProgressIndicator());
-              }
-            },
+            itemBuilder: (context, index) => _buildListItem(context, index,
+                listData: pokemonList, isLoading: isLoading),
             itemCount: pokemonList.length + 1,
             separatorBuilder: (BuildContext context, int index) => SizedBox(
               height: index < pokemonList.length ? 8 : 0,

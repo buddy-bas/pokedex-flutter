@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/home/home.dart';
+import 'package:pokedex/routes/app_router.dart';
 import 'package:pokemon_repository/pokemon_repository.dart';
 
 class App extends StatelessWidget {
@@ -8,11 +8,12 @@ class App extends StatelessWidget {
       : _pokemonRepository = pokemonRepository;
 
   final PokemonRepository _pokemonRepository;
+  // GoRouter configuration
 
   @override
   Widget build(BuildContext context) => RepositoryProvider.value(
       value: _pokemonRepository,
-      child: const MaterialApp(
-        home: HomePage(),
+      child: MaterialApp.router(
+        routerConfig: AppRouter().router,
       ));
 }
