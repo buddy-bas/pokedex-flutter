@@ -12,9 +12,10 @@ class AppRouter {
         builder: (context, state) => const HomePage(),
       ),
       GoRoute(
-        path: '/detail',
+        path: '/detail:id',
         name: 'detail',
-        builder: (context, state) => const DetailView(),
+        builder: (context, state) =>
+            DetailPage(id: state.pathParameters['id']!),
       ),
     ],
   );

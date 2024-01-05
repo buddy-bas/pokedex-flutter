@@ -9,9 +9,16 @@ part of 'pokemon_detail.dart';
 PokemonDetailResponse _$PokemonDetailResponseFromJson(
         Map<String, dynamic> json) =>
     PokemonDetailResponse(
-      json['weight'] as int,
-      json['height'] as int,
-      sprites: Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
+      weight: json['weight'] as int,
+      name: json['name'] as String,
+      height: json['height'] as int,
+      types: (json['types'] as List<dynamic>)
+          .map((e) => ElementType.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      species: Species.fromJson(json['species'] as Map<String, dynamic>),
+      abilities: (json['abilities'] as List<dynamic>)
+          .map((e) => Ability.fromJson(e as Map<String, dynamic>))
+          .toList(),
       stats: (json['stats'] as List<dynamic>)
           .map((e) => Stat.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -20,18 +27,72 @@ PokemonDetailResponse _$PokemonDetailResponseFromJson(
 Map<String, dynamic> _$PokemonDetailResponseToJson(
         PokemonDetailResponse instance) =>
     <String, dynamic>{
-      'sprites': instance.sprites.toJson(),
       'stats': instance.stats.map((e) => e.toJson()).toList(),
       'weight': instance.weight,
       'height': instance.height,
+      'types': instance.types.map((e) => e.toJson()).toList(),
+      'species': instance.species.toJson(),
+      'abilities': instance.abilities.map((e) => e.toJson()).toList(),
+      'name': instance.name,
+    };
+
+Ability _$AbilityFromJson(Map<String, dynamic> json) => Ability(
+      ability: AbilityDetail.fromJson(json['ability'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AbilityToJson(Ability instance) => <String, dynamic>{
+      'ability': instance.ability,
+    };
+
+AbilityDetail _$AbilityDetailFromJson(Map<String, dynamic> json) =>
+    AbilityDetail(
+      name: json['name'] as String,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$AbilityDetailToJson(AbilityDetail instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
+    };
+
+Species _$SpeciesFromJson(Map<String, dynamic> json) => Species(
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$SpeciesToJson(Species instance) => <String, dynamic>{
+      'url': instance.url,
+    };
+
+ElementType _$ElementTypeFromJson(Map<String, dynamic> json) => ElementType(
+      type: ElementTypeDetail.fromJson(json['type'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ElementTypeToJson(ElementType instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+ElementTypeDetail _$ElementTypeDetailFromJson(Map<String, dynamic> json) =>
+    ElementTypeDetail(
+      name: json['name'] as String,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$ElementTypeDetailToJson(ElementTypeDetail instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
     };
 
 Stat _$StatFromJson(Map<String, dynamic> json) => Stat(
+      StatDetail.fromJson(json['stat'] as Map<String, dynamic>),
       baseStat: json['base_stat'] as int,
     );
 
 Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{
       'base_stat': instance.baseStat,
+      'stat': instance.stat,
     };
 
 StatDetail _$StatDetailFromJson(Map<String, dynamic> json) => StatDetail(
@@ -41,12 +102,4 @@ StatDetail _$StatDetailFromJson(Map<String, dynamic> json) => StatDetail(
 Map<String, dynamic> _$StatDetailToJson(StatDetail instance) =>
     <String, dynamic>{
       'name': instance.name,
-    };
-
-Sprites _$SpritesFromJson(Map<String, dynamic> json) => Sprites(
-      frontDefault: json['front_default'] as String,
-    );
-
-Map<String, dynamic> _$SpritesToJson(Sprites instance) => <String, dynamic>{
-      'front_default': instance.frontDefault,
     };

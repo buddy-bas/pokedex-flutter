@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key, required this.title});
+  const Header({
+    super.key,
+    required this.title,
+    this.actionWidget,
+  });
 
   final String title;
+  final Widget? actionWidget;
 
   bool hasTopSafeAreaTop(BuildContext context) {
     double top = MediaQuery.of(context).viewPadding.top;
@@ -21,10 +27,12 @@ class Header extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pop();
+              },
               icon: const Icon(
                 Icons.arrow_back,
-                color: Colors.black,
+                color: Colors.white,
               )),
           Expanded(
             child: Text(
@@ -33,22 +41,19 @@ class Header extends StatelessWidget {
               maxLines:
                   2, // Set the maximum number of lines // Display ellipsis if text is truncated
               style: const TextStyle(
+                color: Colors.white,
                 fontSize: 24,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w700,
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          const Text(
-            "#001",
-            style: TextStyle(
-              fontSize: 12,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w700,
-              height: 0.11,
-            ),
-          ),
+          actionWidget != null
+              ? actionWidget!
+              : const SizedBox(
+                  width: 0,
+                  height: 0,
+                )
         ],
       ),
     ));

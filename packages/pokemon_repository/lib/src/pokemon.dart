@@ -8,6 +8,6 @@ class PokemonRepository {
   Future<PokemonListResponse> getPokemonList({String? url}) =>
       _pokemonApiClient.pokemonList(url: url);
 
-  Future<PokemonDetailResponse> getPokemonDetail({required String url}) =>
-      _pokemonApiClient.pokemonDetail(url: url);
+  Future<PokemonDetailResponse> getPokemonDetail({required String id}) =>
+      _pokemonApiClient.pokemonDetail(id: id);
 }

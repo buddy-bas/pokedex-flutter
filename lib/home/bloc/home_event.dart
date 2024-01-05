@@ -10,8 +10,3 @@ final class FetchPokemonList extends HomeEvent {
   FetchPokemonList({this.url});
   final String? url;
 }
-
-final class FetchPokemonDetail extends HomeEvent {
-  FetchPokemonDetail({required this.url});
-  final String url;
-}

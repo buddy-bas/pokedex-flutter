@@ -1,6 +1,5 @@
 import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pokemon_api/pokemon_api.dart';
 
 class PokemonApiClient {
@@ -16,13 +15,12 @@ class PokemonApiClient {
     return PokemonListResponse.fromJson(res.data);
   }
 
-  Future<PokemonDetailResponse> pokemonDetail({required String url}) async {
-    final res = await _httpClient.get(url);
+  Future<PokemonDetailResponse> pokemonDetail({required String id}) async {
+    final res = await _httpClient.get('https://pokeapi.co/api/v2/pokemon/$id');
 
     if (res.statusCode != 200) {
       throw Error();
     }
-    debugPrint(res.data);
     return PokemonDetailResponse.fromJson(res.data);
   }
 }

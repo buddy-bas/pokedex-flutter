@@ -7,7 +7,7 @@ final class HomeState extends Equatable {
       this.isLoading = false,
       this.hasReachedMax = false});
 
-  final List<PokemonResponseResult> pokemonList;
+  final List<PokemonResultResponse> pokemonList;
   final bool isLoading;
   final bool hasReachedMax;
 
@@ -20,7 +20,7 @@ final class HomeState extends Equatable {
   }
 
   HomeState copyWith(
-      {List<PokemonResponseResult>? pokemonList,
+      {List<PokemonResultResponse>? pokemonList,
       bool? isLoading,
       bool? hasReachedMax}) {
     return HomeState(

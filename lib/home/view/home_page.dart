@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokedex/extension/extensions.dart';
 import 'package:pokedex/home/bloc/home_bloc.dart';
 import 'package:pokedex/home/widgets/widgets.dart';
 import 'package:pokemon_api/pokemon_api.dart';
@@ -44,17 +45,16 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildListItem(BuildContext context, int index,
       {required bool isLoading,
-      required List<PokemonResponseResult> listData}) {
+      required List<PokemonResultResponse> listData}) {
     if (index < listData.length) {
-      final uri = Uri.parse(listData[index].url);
-      final id = uri.pathSegments[3];
+      final id = listData[index].url.idFromPokeUrl();
       return InkWell(
         splashColor: Colors.transparent,
         onTap: () {
-          context.pushNamed('detail');
+          context.pushNamed('detail', pathParameters: {"id": id});
         },
         child: ListItem(
-          name: listData[index].name,
+          name: listData[index].name.capitalize(),
           id: id,
         ),
       );

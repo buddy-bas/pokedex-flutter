@@ -3,10 +3,26 @@ import 'package:flutter/material.dart';
 import 'animate_progress_bar.dart';
 
 class StatusRow extends StatelessWidget {
-  const StatusRow({super.key, required this.label, required this.value});
+  const StatusRow(
+      {super.key,
+      required this.label,
+      required this.value,
+      required this.color});
 
   final String label;
   final double value;
+  final Color color;
+
+  String _convertValueToLabel() {
+    final label = value.toInt().toString();
+    if (value < 10) {
+      return '00$label';
+    } else if (value < 100) {
+      return '0$label';
+    } else {
+      return label;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +33,8 @@ class StatusRow extends StatelessWidget {
           width: 40,
           child: Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
+              color: color,
               fontSize: 14,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w700,
@@ -28,7 +45,7 @@ class StatusRow extends StatelessWidget {
           width: 16,
         ),
         Text(
-          value.toString(),
+          _convertValueToLabel(),
           style: const TextStyle(
             fontSize: 14,
             fontFamily: 'Poppins',
@@ -38,7 +55,11 @@ class StatusRow extends StatelessWidget {
         const SizedBox(
           width: 8,
         ),
-        AnimateProgressBar(value: value, maxValue: 255),
+        AnimateProgressBar(
+          value: value,
+          maxValue: 255,
+          accentColor: color,
+        ),
       ],
     );
   }

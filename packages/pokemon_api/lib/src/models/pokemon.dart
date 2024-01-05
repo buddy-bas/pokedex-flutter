@@ -19,19 +19,19 @@ class PokemonListResponse {
   Map<String, dynamic> toJson() => _$PokemonListResponseToJson(this);
 
   final int count;
-  final List<PokemonResponseResult> results;
+  final List<PokemonResultResponse> results;
   final String? next;
   final String? previous;
 }
 
 @JsonSerializable()
-class PokemonResponseResult {
-  PokemonResponseResult({required this.name, required this.url});
+class PokemonResultResponse {
+  const PokemonResultResponse({required this.name, required this.url});
 
-  factory PokemonResponseResult.fromJson(Map<String, dynamic> json) =>
-      _$PokemonResponseResultFromJson(json);
+  factory PokemonResultResponse.fromJson(Map<String, dynamic> json) =>
+      _$PokemonResultResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PokemonResponseResultToJson(this);
+  Map<String, dynamic> toJson() => _$PokemonResultResponseToJson(this);
 
   final String name;
   final String url;

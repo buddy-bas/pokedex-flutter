@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class AnimateProgressBar extends StatefulWidget {
   const AnimateProgressBar(
-      {super.key, required this.maxValue, required this.value});
+      {super.key,
+      required this.maxValue,
+      required this.value,
+      required this.accentColor});
   final double maxValue;
   final double value;
+  final Color accentColor;
 
   @override
   State<AnimateProgressBar> createState() => _AnimateProgressBarState();
@@ -48,13 +52,19 @@ class _AnimateProgressBarState extends State<AnimateProgressBar>
         return Stack(
           children: [
             Container(
-              decoration: BoxDecoration(color: Colors.amber.shade100),
-              height: 4,
+              decoration: ShapeDecoration(
+                  color: widget.accentColor.withAlpha(100),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              height: 5,
             ),
             AnimatedContainer(
                 duration: const Duration(milliseconds: 400),
-                decoration: const BoxDecoration(color: Colors.amber),
-                height: 4,
+                decoration: ShapeDecoration(
+                    color: widget.accentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                height: 5,
                 width: _containerWidth,
                 curve: Curves.easeOut)
           ],

@@ -10,7 +10,7 @@ PokemonListResponse _$PokemonListResponseFromJson(Map<String, dynamic> json) =>
     PokemonListResponse(
       count: json['count'] as int,
       results: (json['results'] as List<dynamic>)
-          .map((e) => PokemonResponseResult.fromJson(e as Map<String, dynamic>))
+          .map((e) => PokemonResultResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       previous: json['previous'] as String?,
       next: json['next'] as String?,
@@ -25,15 +25,15 @@ Map<String, dynamic> _$PokemonListResponseToJson(
       'previous': instance.previous,
     };
 
-PokemonResponseResult _$PokemonResponseResultFromJson(
+PokemonResultResponse _$PokemonResultResponseFromJson(
         Map<String, dynamic> json) =>
-    PokemonResponseResult(
+    PokemonResultResponse(
       name: json['name'] as String,
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$PokemonResponseResultToJson(
-        PokemonResponseResult instance) =>
+Map<String, dynamic> _$PokemonResultResponseToJson(
+        PokemonResultResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
       'url': instance.url,

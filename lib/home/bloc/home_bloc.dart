@@ -12,7 +12,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : _pokemonRepository = pokemonRepository,
         super(const HomeState()) {
     on<FetchPokemonList>(_fetchPokemonList);
-    on<FetchPokemonDetail>(_fetchPokemonDetail);
   }
 
   final PokemonRepository _pokemonRepository;
@@ -26,24 +25,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(isLoading: true));
     try {
       final data = await _pokemonRepository.getPokemonList(url: nextUrl);
-      emit(state.copyWith(
-          pokemonList: List.of(state.pokemonList)..addAll(data.results)));
-      if (data.next!.isEmpty) emit(state.copyWith(hasReachedMax: true));
-      nextUrl = data.next;
-    } finally {
-      emit(state.copyWith(isLoading: false));
-    }
-  }
-
-  Future<void> _fetchPokemonDetail(
-    FetchPokemonDetail event,
-    Emitter<HomeState> emit,
-  ) async {
-    if (state.hasReachedMax) return;
-    emit(state.copyWith(isLoading: true));
-    try {
-      final data = await _pokemonRepository.getPokemonList(url: nextUrl);
-
       emit(state.copyWith(
           pokemonList: List.of(state.pokemonList)..addAll(data.results)));
       if (data.next!.isEmpty) emit(state.copyWith(hasReachedMax: true));

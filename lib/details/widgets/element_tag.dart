@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ElementTag extends StatelessWidget {
-  const ElementTag({super.key});
+  const ElementTag({super.key, required this.name, required this.color});
+  final String name;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -9,18 +11,18 @@ class ElementTag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: const Color(0xFF74CB48),
+        color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text(
-        "Fire",
-        style: TextStyle(
-          fontSize: 14,
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.w700,
-        ),
+      child: Text(
+        name,
+        style: const TextStyle(
+            fontSize: 14,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w700,
+            color: Colors.white),
       ),
     );
   }
