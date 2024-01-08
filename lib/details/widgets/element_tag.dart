@@ -19,10 +19,7 @@ class ElementTag extends StatelessWidget {
       child: Text(
         name,
         style: const TextStyle(
-            fontSize: 14,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w700,
-            color: Colors.white),
+            fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
       ),
     );
   }

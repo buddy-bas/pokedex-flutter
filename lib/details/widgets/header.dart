@@ -5,11 +5,11 @@ class Header extends StatelessWidget {
   const Header({
     super.key,
     required this.title,
-    this.actionWidget,
+    this.trailing,
   });
 
   final String title;
-  final Widget? actionWidget;
+  final Widget? trailing;
 
   bool hasTopSafeAreaTop(BuildContext context) {
     double top = MediaQuery.of(context).viewPadding.top;
@@ -43,13 +43,12 @@ class Header extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
-                fontFamily: 'Poppins',
                 fontWeight: FontWeight.w700,
               ),
             ),
           ),
-          actionWidget != null
-              ? actionWidget!
+          trailing != null
+              ? trailing!
               : const SizedBox(
                   width: 0,
                   height: 0,

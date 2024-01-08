@@ -36,7 +36,6 @@ class StatusRow extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: 14,
-              fontFamily: 'Poppins',
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -48,7 +47,6 @@ class StatusRow extends StatelessWidget {
           _convertValueToLabel(),
           style: const TextStyle(
             fontSize: 14,
-            fontFamily: 'Poppins',
             fontWeight: FontWeight.w400,
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:pokedex/details/bloc/detail_bloc.dart';
 import 'package:pokedex/details/models/models.dart';
 import 'package:pokedex/details/widgets/widgets.dart';
 import 'package:pokedex/extension/extensions.dart';
+import 'package:pokedex/icons/custom_icons.dart';
 
 class DetailSection extends StatelessWidget {
   const DetailSection({super.key});
@@ -34,6 +35,7 @@ class DetailSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final detail = context.select((DetailBloc bloc) => bloc.state.detail);
+    debugPrint(detail.flavorText.replaceAll('\\n', ''));
 
     return Container(
       padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -55,7 +57,6 @@ class DetailSection extends StatelessWidget {
                 style: TextStyle(
                   color: detail.primaryColor,
                   fontSize: 18,
-                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -67,26 +68,41 @@ class DetailSection extends StatelessWidget {
                 PhysicCharacterCard(
                   label: "Weight",
                   value: detail.weight,
+                  iconData: CustomIcons.weight_hanging,
+                  iconColor: detail.primaryColor,
                 ),
                 PhysicCharacterCard(
-                  label: "Height",
-                  value: detail.height,
-                ),
+                    label: "Height",
+                    value: detail.height,
+                    iconData: CustomIcons.ruler_vertical,
+                    iconColor: detail.primaryColor),
                 PhysicCharacterCard(
-                  label: "Move",
-                  value: detail.abilities[0].name.capitalize(),
-                )
+                    label: "Move",
+                    value: detail.abilities[0].name.capitalize(),
+                    iconData: CustomIcons.hotjar,
+                    iconColor: detail.primaryColor)
               ],
             ),
             const SizedBox(
               height: 16,
             ),
-            const Text(
-              "This is a pokemon",
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+            SizedBox(
+              height: 60,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      detail.flavorText,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -96,7 +112,6 @@ class DetailSection extends StatelessWidget {
                 style: TextStyle(
                   color: detail.primaryColor,
                   fontSize: 18,
-                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -109,7 +124,6 @@ class DetailSection extends StatelessWidget {
                 style: TextStyle(
                   color: detail.primaryColor,
                   fontSize: 18,
-                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
                 ),
               ),

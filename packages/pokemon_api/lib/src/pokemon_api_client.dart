@@ -23,4 +23,14 @@ class PokemonApiClient {
     }
     return PokemonDetailResponse.fromJson(res.data);
   }
+
+  Future<PokemonSpeciesResponse> pokemonSpecies({required String name}) async {
+    final res = await _httpClient
+        .get('https://pokeapi.co/api/v2/pokemon-species/$name');
+
+    if (res.statusCode != 200) {
+      throw Error();
+    }
+    return PokemonSpeciesResponse.fromJson(res.data);
+  }
 }

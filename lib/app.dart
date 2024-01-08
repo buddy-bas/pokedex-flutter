@@ -14,6 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => RepositoryProvider.value(
       value: _pokemonRepository,
       child: MaterialApp.router(
+        theme: ThemeData(fontFamily: 'Poppins'),
         routerConfig: AppRouter().router,
       ));
 }

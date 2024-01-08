@@ -38,25 +38,29 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     }
   }
 
-  PokemonDetail _convertApiToBlocModel(PokemonDetailResponse res) {
+  PokemonDetail _convertApiToBlocModel(
+      PokemonDetailResponse detailRes, PokemonSpeciesResponse speciesRes) {
     return PokemonDetail(
-        primaryColor:
-            StaticData.elementColors[res.types[0].type.url.idFromPokeUrl()]!,
-        types: res.types
+        primaryColor: StaticData
+            .elementColors[detailRes.types[0].type.url.idFromPokeUrl()]!,
+        types: detailRes.types
             .map((e) => ElementType(
                 name: e.type.name,
                 color: StaticData.elementColors[e.type.url.idFromPokeUrl()]!))
             .toList(),
-        stats: res.stats
+        stats: detailRes.stats
             .map((e) => Stat(
                 label: _covertStatusName(e.stat.name),
                 value: e.baseStat.toDouble()))
             .toList(),
-        name: res.name,
-        weight: res.weight.toString(),
-        height: res.height.toString(),
-        abilities:
-            res.abilities.map((e) => Ability(name: e.ability.name)).toList());
+        name: detailRes.name,
+        weight: detailRes.weight.toString(),
+        height: detailRes.height.toString(),
+        flavorText:
+            speciesRes.flavorTextEntries[0].flavorText.replaceAll("\n", " "),
+        abilities: detailRes.abilities
+            .map((e) => Ability(name: e.ability.name))
+            .toList());
   }
 
   Future<void> _fetchPokemonDetail(
@@ -65,8 +69,11 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   ) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final data = await _pokemonRepository.getPokemonDetail(id: event.id);
-      emit(state.copyWith(detail: _convertApiToBlocModel(data)));
+      final detailRes = await _pokemonRepository.getPokemonDetail(id: event.id);
+      final speciesRes =
+          await _pokemonRepository.getPokemonSpecies(name: detailRes.name);
+      emit(state.copyWith(
+          detail: _convertApiToBlocModel(detailRes, speciesRes)));
     } finally {
       emit(state.copyWith(isLoading: false));
     }

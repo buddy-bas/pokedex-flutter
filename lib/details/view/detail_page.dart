@@ -70,14 +70,13 @@ class DetailView extends StatelessWidget {
                   )),
                   Header(
                       title: state.detail.name.capitalize(),
-                      actionWidget: Container(
+                      trailing: Container(
                         margin: const EdgeInsets.only(left: 8),
                         child: Text(
                           "#$id",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
-                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.w700,
                           ),
                         ),

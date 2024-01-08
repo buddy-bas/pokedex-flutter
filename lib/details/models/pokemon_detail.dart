@@ -9,7 +9,7 @@ class PokemonDetail extends Equatable {
       required this.name,
       required this.types,
       required this.primaryColor,
-      // required this.species,
+      required this.flavorText,
       required this.abilities});
 
   @override
@@ -19,7 +19,7 @@ class PokemonDetail extends Equatable {
   final String height;
   final String name;
   final List<ElementType> types;
-  // final Species species;
+  final String flavorText;
   final List<Ability> abilities;
   final Color primaryColor;
 }
