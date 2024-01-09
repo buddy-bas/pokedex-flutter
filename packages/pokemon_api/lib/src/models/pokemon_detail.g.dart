@@ -58,10 +58,12 @@ Map<String, dynamic> _$AbilityDetailToJson(AbilityDetail instance) =>
 
 Species _$SpeciesFromJson(Map<String, dynamic> json) => Species(
       url: json['url'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$SpeciesToJson(Species instance) => <String, dynamic>{
       'url': instance.url,
+      'name': instance.name,
     };
 
 ElementType _$ElementTypeFromJson(Map<String, dynamic> json) => ElementType(

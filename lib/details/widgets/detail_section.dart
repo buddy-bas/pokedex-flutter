@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/data/static_data.dart';
 import 'package:pokedex/details/bloc/detail_bloc.dart';
 import 'package:pokedex/details/models/models.dart';
 import 'package:pokedex/details/widgets/widgets.dart';
@@ -35,7 +36,6 @@ class DetailSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final detail = context.select((DetailBloc bloc) => bloc.state.detail);
-    debugPrint(detail.flavorText.replaceAll('\\n', ''));
 
     return Container(
       padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -128,6 +128,12 @@ class DetailSection extends StatelessWidget {
                 ),
               ),
             ),
+            Column(
+              children: detail.evolutionChain
+                  .map(
+                      (e) => Image.network(StaticData.pokemonImageUrl(e[0].id)))
+                  .toList(),
+            )
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/data/static_data.dart';
 import 'package:pokedex/details/bloc/detail_bloc.dart';
 import 'package:pokedex/details/widgets/widgets.dart';
 import 'package:pokemon_repository/pokemon_repository.dart';
@@ -58,7 +59,7 @@ class DetailView extends StatelessWidget {
                             offset: const Offset(0, -144),
                             child: Center(
                               child: Image.network(
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
+                                StaticData.pokemonImageUrl(id),
                                 width: 200,
                                 height: 200,
                               ),

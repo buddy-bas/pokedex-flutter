@@ -14,4 +14,8 @@ class PokemonRepository {
 
   Future<PokemonSpeciesResponse> getPokemonSpecies({required String name}) =>
       _pokemonApiClient.pokemonSpecies(name: name);
+
+  Future<PokemonEvolutionChainResponse> getPokemonEvolution(
+          {required String id}) =>
+      _pokemonApiClient.pokemonEvolution(id: id);
 }

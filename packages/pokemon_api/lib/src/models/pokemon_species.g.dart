@@ -12,6 +12,8 @@ PokemonSpeciesResponse _$PokemonSpeciesResponseFromJson(
       flavorTextEntries: (json['flavor_text_entries'] as List<dynamic>)
           .map((e) => FlavorText.fromJson(e as Map<String, dynamic>))
           .toList(),
+      evolutionChain: EvolutionChain.fromJson(
+          json['evolution_chain'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PokemonSpeciesResponseToJson(
@@ -19,6 +21,17 @@ Map<String, dynamic> _$PokemonSpeciesResponseToJson(
     <String, dynamic>{
       'flavor_text_entries':
           instance.flavorTextEntries.map((e) => e.toJson()).toList(),
+      'evolution_chain': instance.evolutionChain.toJson(),
+    };
+
+EvolutionChain _$EvolutionChainFromJson(Map<String, dynamic> json) =>
+    EvolutionChain(
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$EvolutionChainToJson(EvolutionChain instance) =>
+    <String, dynamic>{
+      'url': instance.url,
     };
 
 FlavorText _$FlavorTextFromJson(Map<String, dynamic> json) => FlavorText(

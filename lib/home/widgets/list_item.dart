@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/data/static_data.dart';
 
 class ListItem extends StatelessWidget {
   const ListItem({
@@ -23,7 +24,7 @@ class ListItem extends StatelessWidget {
             margin: const EdgeInsets.only(right: 24),
             // decoration: BoxDecoration(color: Colors.grey.shade100),
             child: Image.network(
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
+              StaticData.pokemonImageUrl(id),
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) {
                   return child;

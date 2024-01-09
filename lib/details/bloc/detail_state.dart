@@ -11,6 +11,7 @@ final class DetailState extends Equatable {
         height: '',
         name: '',
         types: [],
+        evolutionChain: [],
         flavorText: '',
         abilities: []),
   });

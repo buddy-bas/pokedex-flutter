@@ -21,4 +21,7 @@ class StaticData {
     '17': const Color(0xFF75574C), //dark
     '18': const Color(0xFFE69EAC), //fairy
   };
+
+  static String pokemonImageUrl(String id) =>
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
 }

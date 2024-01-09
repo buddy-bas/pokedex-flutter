@@ -1,6 +1,7 @@
 import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:pokemon_api/pokemon_api.dart';
+import 'package:pokemon_api/src/models/pokemon_evolution_chain.dart';
 
 class PokemonApiClient {
   final Dio _httpClient = ApiClient().dio();
@@ -32,5 +33,16 @@ class PokemonApiClient {
       throw Error();
     }
     return PokemonSpeciesResponse.fromJson(res.data);
+  }
+
+  Future<PokemonEvolutionChainResponse> pokemonEvolution(
+      {required String id}) async {
+    final res =
+        await _httpClient.get('https://pokeapi.co/api/v2/evolution-chain/$id');
+
+    if (res.statusCode != 200) {
+      throw Error();
+    }
+    return PokemonEvolutionChainResponse.fromJson(res.data);
   }
 }

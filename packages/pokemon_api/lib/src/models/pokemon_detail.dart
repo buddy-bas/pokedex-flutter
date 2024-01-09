@@ -53,12 +53,13 @@ class AbilityDetail {
 
 @JsonSerializable()
 class Species {
-  const Species({required this.url});
+  const Species({required this.url, required this.name});
   factory Species.fromJson(Map<String, dynamic> json) =>
       _$SpeciesFromJson(json);
   Map<String, dynamic> toJson() => _$SpeciesToJson(this);
 
   final String url;
+  final String name;
 }
 
 @JsonSerializable()
