@@ -6,6 +6,7 @@ import 'package:pokedex/details/models/models.dart';
 import 'package:pokedex/details/widgets/widgets.dart';
 import 'package:pokedex/extension/extensions.dart';
 import 'package:pokedex/icons/custom_icons.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class DetailSection extends StatelessWidget {
   const DetailSection({super.key});
@@ -17,6 +18,7 @@ class DetailSection extends StatelessWidget {
             color: labelColor,
           ))
       .toList();
+
   List<Widget> _elementList(List<ElementType> list) {
     return list.asMap().entries.map((e) {
       int index = e.key;
@@ -31,6 +33,59 @@ class DetailSection extends StatelessWidget {
       }
       return ElementTag(name: value.name.capitalize(), color: value.color);
     }).toList();
+  }
+
+  List<Widget> _evolutionGrid(EvolutionChain chain, Color primaryColor) {
+    return chain
+        .map((e) => Flexible(
+                child: Row(
+              children: [
+                Flexible(
+                  child: StaggeredGrid.count(
+                    crossAxisCount: e.length <= 2 ? 1 : 2,
+                    crossAxisSpacing: 5,
+                    children: e
+                        .map((e) => StaggeredGridTile.count(
+                              crossAxisCellCount: 1,
+                              mainAxisCellCount: 1,
+                              child: Image.network(
+                                  StaticData.pokemonImageUrl(e.id)),
+                            ))
+                        .toList(),
+                  ),
+                ),
+                (chain.indexOf(e) < chain.length - 1)
+                    ? Icon(
+                        CustomIcons.arrow_right,
+                        size: 30,
+                        color: primaryColor,
+                      )
+                    : const SizedBox()
+              ],
+            )))
+        .toList();
+  }
+
+  Widget _evolutionSection(PokemonDetail detail) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 16),
+          child: Text(
+            "Evolution",
+            style: TextStyle(
+              color: detail.primaryColor,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: _evolutionGrid(detail.evolutionChain, detail.primaryColor),
+        )
+      ],
+    );
   }
 
   @override
@@ -117,23 +172,11 @@ class DetailSection extends StatelessWidget {
               ),
             ),
             Column(children: _statList(detail.stats, detail.primaryColor)),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 16),
-              child: Text(
-                "Evolution",
-                style: TextStyle(
-                  color: detail.primaryColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-            Column(
-              children: detail.evolutionChain
-                  .map(
-                      (e) => Image.network(StaticData.pokemonImageUrl(e[0].id)))
-                  .toList(),
-            )
+            detail.evolutionChain.length > 1
+                ? _evolutionSection(detail)
+                : const SizedBox(
+                    height: 200,
+                  )
           ],
         ),
       ),

@@ -10,7 +10,7 @@ import 'package:pokemon_repository/pokemon_repository.dart';
 part 'detail_event.dart';
 part 'detail_state.dart';
 
-typedef CheckCallback = void Function(List<Species> species);
+typedef CombineEvolutionCallback = void Function(List<Species> species);
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {
   DetailBloc({required PokemonRepository pokemonRepository})
@@ -41,7 +41,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   }
 
   void _combineEvolution(
-      List<pokemon_api.Chain> evolvesTo, CheckCallback onResult) {
+      List<pokemon_api.Chain> evolvesTo, CombineEvolutionCallback onResult) {
     List<Species> speciesGroup = [];
     for (var element in evolvesTo) {
       final species = Species(
@@ -59,7 +59,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       pokemon_api.PokemonEvolutionChainResponse chainRes) {
     EvolutionChain chain = [];
     _combineEvolution(chainRes.chain.evolvesTo, (species) {
-      chain.add(species);
+      if (species.isNotEmpty) chain.add(species);
     });
     chain.add([
       Species(
@@ -74,7 +74,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       pokemon_api.PokemonSpeciesResponse speciesRes,
       pokemon_api.PokemonEvolutionChainResponse chainRes) {
     EvolutionChain chain = _getEvolutionChain(chainRes);
-
+    debugPrint("${chain.reversed.toString()}");
     return PokemonDetail(
         primaryColor: StaticData
             .elementColors[detailRes.types[0].type.url.idFromPokeUrl()]!,

@@ -7,8 +7,8 @@ class PokemonApiClient {
   final Dio _httpClient = ApiClient().dio();
 
   Future<PokemonListResponse> pokemonList({int limit = 30, String? url}) async {
-    final res = await _httpClient
-        .get(url ?? 'https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=0');
+    final res = await _httpClient.get(
+        url ?? 'https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=149');
 
     if (res.statusCode != 200) {
       throw Error();

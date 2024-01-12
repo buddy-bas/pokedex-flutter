@@ -23,6 +23,12 @@
       "css": "ruler_vertical",
       "code": 62792,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "3397c2349d739795b92fd8d1958ee092",
+      "css": "arrow_right",
+      "code": 61537,
+      "src": "fontawesome5"
     }
   ]
 }
