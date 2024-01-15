@@ -74,7 +74,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       pokemon_api.PokemonSpeciesResponse speciesRes,
       pokemon_api.PokemonEvolutionChainResponse chainRes) {
     EvolutionChain chain = _getEvolutionChain(chainRes);
-    debugPrint("${chain.reversed.toString()}");
+
     return PokemonDetail(
         primaryColor: StaticData
             .elementColors[detailRes.types[0].type.url.idFromPokeUrl()]!,
@@ -89,8 +89,8 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
                 value: e.baseStat.toDouble()))
             .toList(),
         name: detailRes.name,
-        weight: detailRes.weight.toString(),
-        height: detailRes.height.toString(),
+        weight: "${detailRes.weight / 10} kg",
+        height: "${detailRes.height / 10} m",
         evolutionChain: chain.reversed.toList(),
         flavorText:
             speciesRes.flavorTextEntries[0].flavorText.replaceAll("\n", " "),

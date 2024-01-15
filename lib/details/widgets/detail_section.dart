@@ -35,35 +35,50 @@ class DetailSection extends StatelessWidget {
     }).toList();
   }
 
-  List<Widget> _evolutionGrid(EvolutionChain chain, Color primaryColor) {
-    return chain
-        .map((e) => Flexible(
-                child: Row(
-              children: [
+  Widget _evolutionGrid(EvolutionChain chain, Color primaryColor) {
+    return Row(
+      children: chain
+          .expand((e) => [
                 Flexible(
                   child: StaggeredGrid.count(
                     crossAxisCount: e.length <= 2 ? 1 : 2,
-                    crossAxisSpacing: 5,
                     children: e
                         .map((e) => StaggeredGridTile.count(
                               crossAxisCellCount: 1,
                               mainAxisCellCount: 1,
-                              child: Image.network(
-                                  StaticData.pokemonImageUrl(e.id)),
+                              child: Column(children: [
+                                Expanded(
+                                  child: Image.network(
+                                    StaticData.pokemonImageUrl(e.id),
+                                    // fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  e.name.capitalize(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ]),
                             ))
                         .toList(),
                   ),
                 ),
-                (chain.indexOf(e) < chain.length - 1)
-                    ? Icon(
-                        CustomIcons.arrow_right,
-                        size: 30,
-                        color: primaryColor,
-                      )
-                    : const SizedBox()
-              ],
-            )))
-        .toList();
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Icon(
+                    CustomIcons.arrow_right,
+                    size: 30,
+                    color: primaryColor,
+                  ),
+                )
+              ])
+          .take(chain.length * 2 - 1)
+          .toList(),
+    );
   }
 
   Widget _evolutionSection(PokemonDetail detail) {
@@ -80,10 +95,7 @@ class DetailSection extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: _evolutionGrid(detail.evolutionChain, detail.primaryColor),
-        )
+        _evolutionGrid(detail.evolutionChain, detail.primaryColor)
       ],
     );
   }
@@ -94,8 +106,13 @@ class DetailSection extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-      margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
-      decoration: const BoxDecoration(color: Colors.white),
+      margin: const EdgeInsets.only(left: 4, right: 4, bottom: 16),
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
       child: Center(
         child: Column(
           children: [
@@ -174,9 +191,7 @@ class DetailSection extends StatelessWidget {
             Column(children: _statList(detail.stats, detail.primaryColor)),
             detail.evolutionChain.length > 1
                 ? _evolutionSection(detail)
-                : const SizedBox(
-                    height: 200,
-                  )
+                : const SizedBox()
           ],
         ),
       ),

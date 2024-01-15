@@ -1,14 +1,13 @@
 import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:pokemon_api/pokemon_api.dart';
-import 'package:pokemon_api/src/models/pokemon_evolution_chain.dart';
 
 class PokemonApiClient {
   final Dio _httpClient = ApiClient().dio();
 
   Future<PokemonListResponse> pokemonList({int limit = 30, String? url}) async {
-    final res = await _httpClient.get(
-        url ?? 'https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=149');
+    final res = await _httpClient
+        .get(url ?? 'https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=0');
 
     if (res.statusCode != 200) {
       throw Error();

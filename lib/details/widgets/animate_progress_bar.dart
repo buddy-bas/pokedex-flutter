@@ -16,7 +16,10 @@ class AnimateProgressBar extends StatefulWidget {
 
 class _AnimateProgressBarState extends State<AnimateProgressBar>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 500),
+  );
   double _progressWidth = 0.0;
   double _containerWidth = 0.0;
 
@@ -30,18 +33,13 @@ class _AnimateProgressBarState extends State<AnimateProgressBar>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _controller.forward(); // Start the animation
     _controller.addListener(() {
       setState(() {
         // Update container properties based on animation value
         _containerWidth = _controller.value * _progressWidth;
       });
     });
+    _controller.forward(); // Start the animation
   }
 
   @override

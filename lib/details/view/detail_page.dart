@@ -45,30 +45,35 @@ class DetailView extends StatelessWidget {
               decoration: BoxDecoration(color: state.detail.primaryColor),
               child: Stack(
                 children: [
-                  SingleChildScrollView(
-                      child: Column(
-                    children: [
-                      const SizedBox(height: 100),
-                      const SizedBox(
-                        height: 144,
-                      ),
-                      Stack(
-                        children: [
-                          const DetailSection(),
-                          Transform.translate(
-                            offset: const Offset(0, -144),
-                            child: Center(
-                              child: Image.network(
-                                StaticData.pokemonImageUrl(id),
-                                width: 200,
-                                height: 200,
-                              ),
+                  CustomScrollView(slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Column(
+                          children: [
+                            const SizedBox(height: 100),
+                            const SizedBox(
+                              height: 144,
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  )),
+                            Stack(
+                              children: [
+                                const DetailSection(),
+                                Transform.translate(
+                                  offset: const Offset(0, -144),
+                                  child: Center(
+                                    child: Image.network(
+                                      StaticData.pokemonImageUrl(id),
+                                      width: 200,
+                                      height: 200,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ]),
+                    ),
+                  ]),
                   Header(
                       title: state.detail.name.capitalize(),
                       trailing: Container(
