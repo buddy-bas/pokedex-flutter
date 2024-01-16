@@ -1,16 +1,28 @@
-# pokedex
+<h1 align="center">Pokedex</h1>
+<p align="center">
+<a href="https://github.com/felangel/bloc"><img src="https://tinyurl.com/bloc-library" alt="Bloc Library"></a>
+</p>
+<p align="center">  
+ 🚀 Pokedex demonstrates Flutter development based on Bloc architecture.
+</p>
 
-A new Flutter project.
+## Architecture
+Based on the Bloc state management and the Repository pattern, which follows the [Bloc state manager document](https://bloclibrary.dev/#/).
 
-## Getting Started
+<img src="https://bloclibrary.dev/assets/bloc_architecture_full.png" width="60%"/>
 
-This project is a starting point for a Flutter application.
+The overall architecture of **Pokedex** is separate into [three layers](https://bloclibrary.dev/#/architecture?id=presentation-layer).
 
-A few resources to get you started if this is your first Flutter project:
+### Data Layer
+- The data provider's responsibility is to provide raw data. The data provider should be generic and versatile.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Business Logic Layer
+- The business logic layer's responsibility is to respond to input from the presentation layer with new states. This layer can depend on one or more repositories to retrieve data needed to build up the application state.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Presentation Layer
+- The presentation layer's responsibility is to figure out how to render itself based on one or more bloc states. In addition, it should handle user input and application lifecycle events.
+
+## API
+<img src="https://user-images.githubusercontent.com/24237865/83422649-d1b1d980-a464-11ea-8c91-a24fdf89cd6b.png" width="21%"/>
+
+Pokedex using the [PokeAPI](https://pokeapi.co/) for constructing RESTful API.<br>
