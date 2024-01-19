@@ -26,10 +26,10 @@ class DetailSection extends StatelessWidget {
           return Container(
               margin: const EdgeInsets.only(right: 16),
               child: ElementTag(
-                  name: value.name.capitalize(), color: value.color));
+                  name: value.name.toCapitalize(), color: value.color));
         }
       }
-      return ElementTag(name: value.name.capitalize(), color: value.color);
+      return ElementTag(name: value.name.toCapitalize(), color: value.color);
     }).toList();
   }
 
@@ -105,7 +105,7 @@ class DetailSection extends StatelessWidget {
                     iconColor: detail.primaryColor),
                 PhysicCharacterCard(
                     label: "Move",
-                    value: detail.abilities[0].name.capitalize(),
+                    value: detail.abilities[0].name.toCapitalize(),
                     iconData: CustomIcons.hotjar,
                     iconColor: detail.primaryColor)
               ],

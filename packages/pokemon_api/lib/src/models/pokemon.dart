@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -5,7 +6,7 @@ part 'pokemon.g.dart';
 
 @immutable
 @JsonSerializable(explicitToJson: true)
-class PokemonListResponse {
+class PokemonListResponse extends Equatable {
   const PokemonListResponse({
     required this.count,
     required this.results,
@@ -22,10 +23,13 @@ class PokemonListResponse {
   final List<PokemonResultResponse> results;
   final String? next;
   final String? previous;
+
+  @override
+  List<Object?> get props => [count, results, next, previous];
 }
 
 @JsonSerializable()
-class PokemonResultResponse {
+class PokemonResultResponse extends Equatable {
   const PokemonResultResponse({required this.name, required this.url});
 
   factory PokemonResultResponse.fromJson(Map<String, dynamic> json) =>
@@ -35,4 +39,7 @@ class PokemonResultResponse {
 
   final String name;
   final String url;
+
+  @override
+  List<Object?> get props => [name, url];
 }

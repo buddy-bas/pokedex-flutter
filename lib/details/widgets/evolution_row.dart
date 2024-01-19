@@ -32,7 +32,7 @@ class EvolutionRow extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  e.name.capitalize(),
+                                  e.name.toCapitalize(),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(

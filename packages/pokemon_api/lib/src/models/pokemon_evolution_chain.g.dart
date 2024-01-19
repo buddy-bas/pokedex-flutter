@@ -26,6 +26,6 @@ Chain _$ChainFromJson(Map<String, dynamic> json) => Chain(
     );
 
 Map<String, dynamic> _$ChainToJson(Chain instance) => <String, dynamic>{
-      'species': instance.species,
-      'evolves_to': instance.evolvesTo,
+      'species': instance.species.toJson(),
+      'evolves_to': instance.evolvesTo.map((e) => e.toJson()).toList(),
     };

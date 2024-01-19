@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
           context.pushNamed('detail', pathParameters: {"id": id});
         },
         child: ListItem(
-          name: listData[index].name.capitalize(),
+          name: listData[index].name.toCapitalize(),
           id: id,
         ),
       );

@@ -75,7 +75,7 @@ class DetailView extends StatelessWidget {
                     ),
                   ]),
                   Header(
-                      title: state.detail.name.capitalize(),
+                      title: state.detail.name.toCapitalize(),
                       trailing: Container(
                         margin: const EdgeInsets.only(left: 8),
                         child: Text(

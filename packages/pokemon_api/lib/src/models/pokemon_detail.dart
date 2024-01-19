@@ -1,11 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'pokemon_detail.g.dart';
 
-@immutable
 @JsonSerializable(explicitToJson: true)
-class PokemonDetailResponse {
+class PokemonDetailResponse extends Equatable {
   const PokemonDetailResponse(
       {required this.weight,
       required this.name,
@@ -27,21 +26,27 @@ class PokemonDetailResponse {
   final Species species;
   final List<Ability> abilities;
   final String name;
-  // final String url;
+
+  @override
+  List<Object?> get props =>
+      [stats, weight, height, types, species, abilities, name];
 }
 
-@JsonSerializable()
-class Ability {
+@JsonSerializable(explicitToJson: true)
+class Ability extends Equatable {
   const Ability({required this.ability});
   factory Ability.fromJson(Map<String, dynamic> json) =>
       _$AbilityFromJson(json);
   Map<String, dynamic> toJson() => _$AbilityToJson(this);
 
   final AbilityDetail ability;
+
+  @override
+  List<Object?> get props => [ability];
 }
 
 @JsonSerializable()
-class AbilityDetail {
+class AbilityDetail extends Equatable {
   const AbilityDetail({required this.name, required this.url});
   factory AbilityDetail.fromJson(Map<String, dynamic> json) =>
       _$AbilityDetailFromJson(json);
@@ -49,10 +54,13 @@ class AbilityDetail {
 
   final String name;
   final String url;
+
+  @override
+  List<Object?> get props => [name, url];
 }
 
 @JsonSerializable()
-class Species {
+class Species extends Equatable {
   const Species({required this.url, required this.name});
   factory Species.fromJson(Map<String, dynamic> json) =>
       _$SpeciesFromJson(json);
@@ -60,10 +68,13 @@ class Species {
 
   final String url;
   final String name;
+
+  @override
+  List<Object?> get props => [name, url];
 }
 
-@JsonSerializable()
-class ElementType {
+@JsonSerializable(explicitToJson: true)
+class ElementType extends Equatable {
   const ElementType({required this.type});
 
   factory ElementType.fromJson(Map<String, dynamic> json) =>
@@ -72,10 +83,13 @@ class ElementType {
   Map<String, dynamic> toJson() => _$ElementTypeToJson(this);
 
   final ElementTypeDetail type;
+
+  @override
+  List<Object?> get props => [type];
 }
 
 @JsonSerializable()
-class ElementTypeDetail {
+class ElementTypeDetail extends Equatable {
   const ElementTypeDetail({required this.name, required this.url});
 
   factory ElementTypeDetail.fromJson(Map<String, dynamic> json) =>
@@ -85,25 +99,37 @@ class ElementTypeDetail {
 
   final String name;
   final String url;
+
+  @override
+  List<Object?> get props => [name, url];
 }
 
-@JsonSerializable()
-class Stat {
-  const Stat(this.stat, {required this.baseStat});
+@JsonSerializable(explicitToJson: true)
+class Stat extends Equatable {
+  const Stat({
+    required this.baseStat,
+    required this.stat,
+  });
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
 
   Map<String, dynamic> toJson() => _$StatToJson(this);
   @JsonKey(name: 'base_stat')
   final int baseStat;
   final StatDetail stat;
+
+  @override
+  List<Object?> get props => [baseStat, stat];
 }
 
 @JsonSerializable()
-class StatDetail {
+class StatDetail extends Equatable {
   const StatDetail({required this.name});
   factory StatDetail.fromJson(Map<String, dynamic> json) =>
       _$StatDetailFromJson(json);
 
   Map<String, dynamic> toJson() => _$StatDetailToJson(this);
   final String name;
+
+  @override
+  List<Object?> get props => [name];
 }

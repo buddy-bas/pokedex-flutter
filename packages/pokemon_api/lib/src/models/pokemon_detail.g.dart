@@ -41,7 +41,7 @@ Ability _$AbilityFromJson(Map<String, dynamic> json) => Ability(
     );
 
 Map<String, dynamic> _$AbilityToJson(Ability instance) => <String, dynamic>{
-      'ability': instance.ability,
+      'ability': instance.ability.toJson(),
     };
 
 AbilityDetail _$AbilityDetailFromJson(Map<String, dynamic> json) =>
@@ -72,7 +72,7 @@ ElementType _$ElementTypeFromJson(Map<String, dynamic> json) => ElementType(
 
 Map<String, dynamic> _$ElementTypeToJson(ElementType instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'type': instance.type.toJson(),
     };
 
 ElementTypeDetail _$ElementTypeDetailFromJson(Map<String, dynamic> json) =>
@@ -88,13 +88,13 @@ Map<String, dynamic> _$ElementTypeDetailToJson(ElementTypeDetail instance) =>
     };
 
 Stat _$StatFromJson(Map<String, dynamic> json) => Stat(
-      StatDetail.fromJson(json['stat'] as Map<String, dynamic>),
       baseStat: json['base_stat'] as int,
+      stat: StatDetail.fromJson(json['stat'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{
       'base_stat': instance.baseStat,
-      'stat': instance.stat,
+      'stat': instance.stat.toJson(),
     };
 
 StatDetail _$StatDetailFromJson(Map<String, dynamic> json) => StatDetail(
