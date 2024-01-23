@@ -10,8 +10,8 @@ class PokemonListResponse extends Equatable {
   const PokemonListResponse({
     required this.count,
     required this.results,
+    required this.next,
     this.previous,
-    this.next,
   });
 
   factory PokemonListResponse.fromJson(Map<String, dynamic> json) =>
@@ -21,7 +21,7 @@ class PokemonListResponse extends Equatable {
 
   final int count;
   final List<PokemonResultResponse> results;
-  final String? next;
+  final String next;
   final String? previous;
 
   @override

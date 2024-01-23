@@ -27,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final data = await _pokemonRepository.getPokemonList(url: nextUrl);
       emit(state.copyWith(
           pokemonList: List.of(state.pokemonList)..addAll(data.results)));
-      if (data.next!.isEmpty) emit(state.copyWith(hasReachedMax: true));
+      if (data.next.isEmpty) emit(state.copyWith(hasReachedMax: true));
       nextUrl = data.next;
     } finally {
       emit(state.copyWith(isLoading: false));
