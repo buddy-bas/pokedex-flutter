@@ -1,12 +1,12 @@
 extension CapitalizeExtensions on String {
-  String capitalize() {
+  String toCapitalize() {
     if (isEmpty) return this;
     return "${this[0].toUpperCase()}${substring(1)}";
   }
 }
 
 extension GetIdFormUrlExtension on String {
-  String idFromPokeUrl() {
+  String toIdFromPokeUrl() {
     final uri = Uri.parse(this);
     final id = uri.pathSegments[3];
     return id;

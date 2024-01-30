@@ -47,14 +47,15 @@ class _HomeViewState extends State<HomeView> {
       {required bool isLoading,
       required List<PokemonResultResponse> listData}) {
     if (index < listData.length) {
-      final id = listData[index].url.idFromPokeUrl();
+      final id = listData[index].url.toIdFromPokeUrl();
       return InkWell(
+        key: Key("pressableListKey$index"),
         splashColor: Colors.transparent,
         onTap: () {
           context.pushNamed('detail', pathParameters: {"id": id});
         },
         child: ListItem(
-          name: listData[index].name.capitalize(),
+          name: listData[index].name.toCapitalize(),
           id: id,
         ),
       );

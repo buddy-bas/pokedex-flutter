@@ -1,11 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'pokemon_species.g.dart';
 
-@immutable
 @JsonSerializable(explicitToJson: true)
-class PokemonSpeciesResponse {
+class PokemonSpeciesResponse extends Equatable {
   const PokemonSpeciesResponse(
       {required this.flavorTextEntries, required this.evolutionChain});
   factory PokemonSpeciesResponse.fromJson(Map<String, dynamic> json) =>
@@ -17,11 +16,14 @@ class PokemonSpeciesResponse {
   final List<FlavorText> flavorTextEntries;
   @JsonKey(name: 'evolution_chain')
   final EvolutionChain evolutionChain;
+
+  @override
+  List<Object?> get props => [flavorTextEntries, evolutionChain];
 }
 
 @JsonSerializable()
-class EvolutionChain {
-  EvolutionChain({required this.url});
+class EvolutionChain extends Equatable {
+  const EvolutionChain({required this.url});
 
   factory EvolutionChain.fromJson(Map<String, dynamic> json) =>
       _$EvolutionChainFromJson(json);
@@ -29,11 +31,14 @@ class EvolutionChain {
   Map<String, dynamic> toJson() => _$EvolutionChainToJson(this);
 
   final String url;
+
+  @override
+  List<Object?> get props => [url];
 }
 
 @JsonSerializable()
-class FlavorText {
-  FlavorText({required this.flavorText});
+class FlavorText extends Equatable {
+  const FlavorText({required this.flavorText});
 
   factory FlavorText.fromJson(Map<String, dynamic> json) =>
       _$FlavorTextFromJson(json);
@@ -42,4 +47,7 @@ class FlavorText {
 
   @JsonKey(name: 'flavor_text')
   final String flavorText;
+
+  @override
+  List<Object?> get props => [flavorText];
 }

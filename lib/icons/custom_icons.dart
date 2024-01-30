@@ -17,10 +17,17 @@
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
 ///
+library;
+
 import 'package:flutter/widgets.dart';
 
 class CustomIcons {
   CustomIcons._();
+
+//For test only
+  static CustomIcons createInstance() {
+    return CustomIcons._();
+  }
 
   static const _kFontFam = 'CustomIcons';
   static const String? _kFontPkg = null;
