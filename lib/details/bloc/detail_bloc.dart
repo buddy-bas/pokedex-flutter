@@ -45,7 +45,8 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     List<Species> speciesGroup = [];
     for (var element in evolvesTo) {
       final species = Species(
-          name: element.species.name, id: element.species.url.idFromPokeUrl());
+          name: element.species.name,
+          id: element.species.url.toIdFromPokeUrl());
       speciesGroup.add(species);
 
       if (element.evolvesTo.isNotEmpty) {
@@ -64,7 +65,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     chain.add([
       Species(
           name: chainRes.chain.species.name,
-          id: chainRes.chain.species.url.idFromPokeUrl())
+          id: chainRes.chain.species.url.toIdFromPokeUrl())
     ]);
     return chain;
   }
@@ -77,11 +78,11 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
 
     return PokemonDetail(
         primaryColor: StaticData
-            .elementColors[detailRes.types[0].type.url.idFromPokeUrl()]!,
+            .elementColors[detailRes.types[0].type.url.toIdFromPokeUrl()]!,
         types: detailRes.types
             .map((e) => ElementType(
                 name: e.type.name,
-                color: StaticData.elementColors[e.type.url.idFromPokeUrl()]!))
+                color: StaticData.elementColors[e.type.url.toIdFromPokeUrl()]!))
             .toList(),
         stats: detailRes.stats
             .map((e) => Stat(
@@ -109,7 +110,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       final speciesRes =
           await _pokemonRepository.getPokemonSpecies(name: detailRes.name);
       final evolvesRes = await _pokemonRepository.getPokemonEvolution(
-          id: speciesRes.evolutionChain.url.idFromPokeUrl());
+          id: speciesRes.evolutionChain.url.toIdFromPokeUrl());
       emit(state.copyWith(
           detail: _convertApiToBlocModel(detailRes, speciesRes, evolvesRes)));
     } finally {

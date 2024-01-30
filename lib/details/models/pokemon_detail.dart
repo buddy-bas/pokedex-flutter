@@ -16,7 +16,17 @@ class PokemonDetail extends Equatable {
       required this.abilities});
 
   @override
-  List<Object?> get props => [stats, weight, height, name, types, abilities];
+  List<Object?> get props => [
+        stats,
+        weight,
+        height,
+        name,
+        types,
+        abilities,
+        primaryColor,
+        flavorText,
+        evolutionChain
+      ];
   final List<Stat> stats;
   final String weight;
   final String height;

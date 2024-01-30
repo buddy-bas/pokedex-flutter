@@ -6,7 +6,7 @@ extension CapitalizeExtensions on String {
 }
 
 extension GetIdFormUrlExtension on String {
-  String idFromPokeUrl() {
+  String toIdFromPokeUrl() {
     final uri = Uri.parse(this);
     final id = uri.pathSegments[3];
     return id;

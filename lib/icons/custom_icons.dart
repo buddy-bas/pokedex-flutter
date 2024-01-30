@@ -24,6 +24,11 @@ import 'package:flutter/widgets.dart';
 class CustomIcons {
   CustomIcons._();
 
+//For test only
+  static CustomIcons createInstance() {
+    return CustomIcons._();
+  }
+
   static const _kFontFam = 'CustomIcons';
   static const String? _kFontPkg = null;
 

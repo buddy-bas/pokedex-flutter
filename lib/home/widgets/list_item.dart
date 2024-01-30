@@ -13,7 +13,7 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("render ListItem");
+    // debugPrint("render ListItem");
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Row(
