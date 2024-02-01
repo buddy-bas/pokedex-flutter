@@ -1,6 +1,6 @@
 <h1 align="center">Pokedex</h1>
 <p align="center">
-<a href="https://github.com/buddy-bas/pokedex-flutter/actions"><img src="https://github.com/buddy-bas/pokedex-flutter/workflows/Flutter/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/buddy-bas/pokedex-flutter/actions"><img src="https://github.com/buddy-bas/pokedex-flutter/workflows/Flutter CI/badge.svg" alt="Build Status"></a>
 <a href="https://github.com/felangel/bloc"><img src="https://tinyurl.com/bloc-library" alt="Bloc Library"></a>
 </p>
 <p align="center">  
