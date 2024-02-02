@@ -2,6 +2,9 @@
 <p align="center">
 <a href="https://github.com/buddy-bas/pokedex-flutter/actions"><img src="https://github.com/buddy-bas/pokedex-flutter/workflows/Flutter CI/badge.svg" alt="Build Status"></a>
 <a href="https://github.com/felangel/bloc"><img src="https://tinyurl.com/bloc-library" alt="Bloc Library"></a>
+ <a href="https://codecov.io/gh/buddy-bas/pokedex-flutter" > 
+ <img src="https://codecov.io/gh/buddy-bas/pokedex-flutter/graph/badge.svg?token=SJ1M5AE1RL"/> 
+ </a>
 </p>
 <p align="center">  
  🚀 Pokedex demonstrates Flutter development based on Bloc architecture.
